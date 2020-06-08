@@ -41,8 +41,8 @@ public class UserController {
     //This method calls the business logic and after the user record is persisted in the database, directs to login page
     @RequestMapping(value = "users/registration", method = RequestMethod.POST)
     public String registerUser(User user, Model model) {
-        String error = "Password must contain atleast 1 alphabet, 1 number & 1 special character";
         boolean passwordCheck = false;
+        String error = "Password must contain atleast 1 alphabet, 1 number & 1 special character";
 
         passwordCheck = userService.isPasswordValid(user.getPassword());
 
@@ -51,9 +51,8 @@ public class UserController {
             return "redirect:/users/login";
         } else {
             model.addAttribute("passwordTypeError", error);
-            registration(model);
+            return registration(model);
         }
-        return null;
     }
 
     //This controller method is called when the request pattern is of type 'users/login'

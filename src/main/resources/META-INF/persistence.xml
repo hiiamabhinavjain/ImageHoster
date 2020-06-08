@@ -21,7 +21,6 @@
             <property name="hibernate.hbm2ddl.auto" value="update"/> <!-- update -->
             <property name="hibernate.show_sql" value="true"/> <!-- Show SQL in console -->
             <property name="hibernate.format_sql" value="true"/> <!-- Show SQL formatted -->
-           <!-- <property name="hibernate.globally_quoted_identifiers" value="true"/>-->
 
         </properties>
 

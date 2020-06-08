@@ -1,6 +1,5 @@
 package ImageHoster.controller;
 
-import ImageHoster.model.Comment;
 import ImageHoster.model.Image;
 import ImageHoster.model.Tag;
 import ImageHoster.model.User;
@@ -28,9 +27,6 @@ public class ImageController {
 
     @Autowired
     private TagService tagService;
-
-    @Autowired
-    private CommentService commentService;
 
     //This method displays all the images in the user home page after successful login
     @RequestMapping("images")
@@ -98,17 +94,6 @@ public class ImageController {
 
     //The method first needs to convert the list of all the tags to a string containing all the tags separated by a comma and then add this string in a Model type object
     //This string is then displayed by 'edit.html' file as previous tags of an image
-//    @RequestMapping(value = "/editImage")
-//    public String editImage(@RequestParam("imageId") Integer imageId, Model model) {
-//        Image image = imageService.getImage(imageId);
-//
-//        String tags = convertTagsToString(image.getTags());
-//        model.addAttribute("image", image);
-//        model.addAttribute("tags", tags);
-//        return "images/edit";
-//    }
-
-
     @RequestMapping(value = "/editImage")
     public String editImage(@RequestParam("imageId") Integer imageId, Model model, HttpSession session) {
         String error = "Only the owner of the image can edit the image";
@@ -123,6 +108,7 @@ public class ImageController {
         } else {
             model.addAttribute("editError", error);
             model.addAttribute("tags", image.getTags());
+            model.addAttribute("comments", image.getComments());
             return "images/image";
         }
         return "images/edit";
@@ -181,6 +167,7 @@ public class ImageController {
             model.addAttribute("deleteError", error);
             model.addAttribute("image", image);
             model.addAttribute("tags", image.getTags());
+            model.addAttribute("comments", image.getComments());
             return "images/image";
         }
     }
@@ -228,20 +215,4 @@ public class ImageController {
         return tagString.toString();
     }
 
-//    @RequestMapping(value = "image/{imageId}/{imageTitle}/comments", method = RequestMethod.POST)
-//    public String addComment(@RequestParam("comment") String text, @PathVariable Integer imageId,
-//                             Comment newComment, HttpSession session, Model model, @PathVariable String imageTitle) {
-//        newComment.setText(text);
-//        newComment.setCreatedDate(new Date());
-//
-//        Image image= imageService.getImage(imageId);
-//        newComment.setImage(image);
-//
-//        User user = (User) session.getAttribute("loggeduser");
-//        newComment.setUser(user);
-//
-//        commentService.createComment(newComment);
-//
-//        return showImage(imageId, model);
-//    }
 }

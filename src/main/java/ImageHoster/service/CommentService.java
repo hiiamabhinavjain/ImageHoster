@@ -11,11 +11,8 @@ public class CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
-    public Comment createComment(Comment comment){
+    public Comment createComment(Comment comment) {
         return commentRepository.createComment(comment);
     }
 
-//    public List<Comment> getCommentsByImageId(String ImageId){
-//        return commentRepository.getCommentsByImageId(ImageId);
-//    }
 }
